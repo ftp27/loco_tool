@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "./lib/logger"
+require_relative '../lib/logger'
 
 # The Helper class provides utility methods for various tasks.
 class Helper

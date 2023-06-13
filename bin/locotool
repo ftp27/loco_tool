@@ -3,8 +3,8 @@
 
 require "thor"
 require "loco_strings"
-require "./lib/logger"
-require "./lib/helper"
+require_relative "../lib/logger"
+require_relative "../lib/helper"
 
 # The Locotool class represents a CLI tool for localization tasks.
 #
