@@ -1,6 +1,6 @@
 # LocoTool
 
-![Gem Version](https://badge.fury.io/rb/loco_tool.svg)
+[![Gem Version](https://badge.fury.io/rb/loco_tool.svg)](https://badge.fury.io/rb/loco_tool)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 LocoTool is a command-line tool for localization tasks, designed to simplify the management and validation of localization strings in iOS and Android projects.
