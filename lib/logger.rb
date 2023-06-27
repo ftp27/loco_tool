@@ -27,6 +27,14 @@ class Logger
     puts "#{Formatter.string(string.key, string.value)} ↔ #{Paint[duplicate.value.to_s, :blue]}"
   end
 
+  # Prints a key transfom message.
+  #
+  # @param old_key [String] The old key.
+  # @param string [LocoString] The LocoString object with a new key.
+  def self.key_transform(old_key, string)
+    puts "#{Paint[old_key, :red]} → #{Formatter.string(string.key, string.value)}"
+  end
+
   # Prints a header.
   #
   # @param text [String] The text to print as the header.
@@ -52,6 +60,13 @@ class Logger
     puts "Lost keys: #{keys.length}"
     puts keys.map { |key| Paint[key.to_s, :red] }.join(", ")
   end
+
+  # Prints an error message.
+  #
+  # @param message [String] The error message to print.
+  def self.error(message)
+    puts Paint["Error: #{message}", :red]
+  end
 end
 
 # Provides utility methods for formatting strings
@@ -63,6 +78,6 @@ class Formatter
   #
   # @return [String] The formatted key-value pair as a string
   def self.string(key, value)
-    "#{Paint[key, :green]} #{Paint[value, :blue]}"
+    "#{Paint[key, :green]}: #{Paint[value, :blue]}"
   end
 end

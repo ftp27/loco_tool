@@ -65,4 +65,53 @@ class Helper
       Logger.string_value(target_key, source_string.value)
     end
   end
+
+  # Sorts the strings in the specified file
+  #
+  # @param file [String] The file to sort
+  # @param sort [String] The sort order (asc or desc)
+  #
+  # @return [Array] An array of sorted strings
+  def self.sort(file, sort)
+    strings = LocoStrings.load(file).read
+    sorted = []
+    strings.each do |key, string|
+      sorted << string
+    end
+    if sort 
+      if sort == "asc"
+        sorted.sort! { |a, b| a.key <=> b.key }
+      elsif sort == "desc"
+        sorted.sort! { |a, b| b.key <=> a.key }
+      else 
+        Logger.error("Invalid sort option")
+        exit
+      end
+    end
+    return sorted
+  end
+
+  # Transforms the keys in the specified file
+  #
+  # @param file [String] The file to transform
+  # @param transform_type [String] The transform type (lower, upper)
+  #
+  # @return [void]
+  def self.transform_keys(strings, transform_type)
+    if !transform_type
+      return
+    end
+    strings.each do |string|
+      old_key = string.key
+      if transform_type == "lower"
+        string.key = string.key.downcase
+      elsif transform_type == "upper"
+        string.key = string.key.upcase
+      else 
+        Logger.error("Invalid transform type")
+        exit
+      end
+      Logger.key_transform(old_key, string)
+    end
+  end
 end

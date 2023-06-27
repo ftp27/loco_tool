@@ -51,6 +51,14 @@ $ locotool sync_ios_auto [PATH_A] [PATH_B] [BASE_LANG]
 
 This command automatically finds and syncs iOS localization files in the specified directories (`PATH_A` and `PATH_B`). It iterates over the available target languages, excluding the base language (`BASE_LANG`), and performs the synchronization operation.
 
+### Transform Localization Files
+
+```
+$ locotool transform [PATH_A] [PATH_B] -s [SORT] -c [CASE]
+```
+
+This command transforms localization files from `PATH_A` to `PATH_B`. It can sort the keys in the output files (`SORT`) and change the case of the keys (`CASE`). The `SORT` parameter can be set to `asc`, or `desc`. The `CASE` parameter can be set to `lower`, or `upper`. Both parameters are optional.
+
 ## Contributing
 
 Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request on the [LocoTool GitHub repository](https://github.com/ftp27/loco_tool).

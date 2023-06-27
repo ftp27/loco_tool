@@ -10,6 +10,23 @@ require_relative "../lib/helper"
 #
 # Usage: locotool [command] [options]
 class Locotool < Thor
+  desc "export FILE_A FILE_B", "Export keys from FILE_A to FILE_B"
+  method_option :sort, :aliases => "-s", :desc => "Sort keys by name. Values: asc, desc"
+  method_option :case, :aliases => "-c", :desc => "Transform case to type of case. Values: lowercase, upcase"
+  def export(file_a, file_b)
+    sorted = Helper.sort(file_a, options[:sort])
+    Logger.header("Exporting #{Paint[sorted.length.to_s, :green]} keys")
+    Helper.transform_keys(sorted, options[:case])
+
+    File.delete(file_b) if File.exist?(file_b)
+    strings_b = LocoStrings.load(file_b)
+
+    sorted.each do |string|
+      strings_b.update(string.key, string.value, string.comment)
+    end
+    strings_b.write
+  end
+
   desc "dublicates FILE_A FILE_B", "Find duplicate keys in localization files"
   def dublicates(file_a, file_b)
     strings_a = LocoStrings.load(file_a).read
