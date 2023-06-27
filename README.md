@@ -54,10 +54,18 @@ This command automatically finds and syncs iOS localization files in the specifi
 ### Transform Localization Files
 
 ```
-$ locotool transform [PATH_A] [PATH_B] -s [SORT] -c [CASE]
+$ locotool export [PATH_A] [PATH_B] -s [SORT] -c [CASE]
 ```
 
 This command transforms localization files from `PATH_A` to `PATH_B`. It can sort the keys in the output files (`SORT`) and change the case of the keys (`CASE`). The `SORT` parameter can be set to `asc`, or `desc`. The `CASE` parameter can be set to `lower`, or `upper`. Both parameters are optional.
+
+## Examples
+
+Export Localization file from iOS to Android
+
+```sh
+$ locotool export en.lproj/Localizable.strings en.xml -s asc -c lower
+```
 
 ## Contributing
 
