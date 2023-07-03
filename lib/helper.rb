@@ -60,7 +60,7 @@ class Helper
       next unless target_key
       next unless lost_keys.include?(target_key)
 
-      strings_b_file.update(target_key, source_string.value)
+      _target.update(target_key, source_string.value)
       lost_keys.delete(target_key)
       Logger.string_value(target_key, source_string.value)
     end
