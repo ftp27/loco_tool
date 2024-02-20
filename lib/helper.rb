@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/logger'
+require_relative "../lib/logger"
 
 # The Helper class provides utility methods for various tasks.
 class Helper
@@ -75,20 +75,20 @@ class Helper
   def self.sort(file, sort)
     strings = LocoStrings.load(file).read
     sorted = []
-    strings.each do |key, string|
+    strings.each do |_key, string|
       sorted << string
     end
-    if sort 
+    if sort
       if sort == "asc"
         sorted.sort! { |a, b| a.key <=> b.key }
       elsif sort == "desc"
         sorted.sort! { |a, b| b.key <=> a.key }
-      else 
+      else
         Logger.error("Invalid sort option")
         exit
       end
     end
-    return sorted
+    sorted
   end
 
   # Transforms the keys in the specified file
@@ -98,20 +98,37 @@ class Helper
   #
   # @return [void]
   def self.transform_keys(strings, transform_type)
-    if !transform_type
-      return
-    end
+    return unless transform_type
+
     strings.each do |string|
       old_key = string.key
       if transform_type == "lower"
         string.key = string.key.downcase
       elsif transform_type == "upper"
         string.key = string.key.upcase
-      else 
+      else
         Logger.error("Invalid transform type")
         exit
       end
       Logger.key_transform(old_key, string)
+    end
+  end
+
+  # Finds oversize strings in the specified file
+  #
+  # @param file [String] The file to check
+  # @param target_lang [String] The target language
+  # @param gap [Integer] The gap between the source length and target strings
+  #
+  # @return [void]
+  def self.oversize(file, target_lang, gap)
+    strings = file.read
+    strings.each do |key, string|
+      target_string = file.value(key, target_lang)
+      limit_length = string.value.length + gap
+      next unless limit_length < target_string.length
+
+      Logger.oversize(string, target_string)
     end
   end
 end

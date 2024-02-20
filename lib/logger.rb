@@ -27,6 +27,12 @@ class Logger
     puts "#{Formatter.string(string.key, string.value)} ↔ #{Paint[duplicate.value.to_s, :blue]}"
   end
 
+  def self.oversize(original, string)
+    length = original.value.length
+    puts "#{Formatter.string(original.key,
+                             original.value)} ↔ #{Paint[string[0...length], :blue]}#{Paint[string[length...], :red]}"
+  end
+
   # Prints a key transfom message.
   #
   # @param old_key [String] The old key.

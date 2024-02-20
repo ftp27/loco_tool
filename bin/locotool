@@ -11,8 +11,8 @@ require_relative "../lib/helper"
 # Usage: locotool [command] [options]
 class Locotool < Thor
   desc "export FILE_A FILE_B", "Export keys from FILE_A to FILE_B"
-  method_option :sort, :aliases => "-s", :desc => "Sort keys by name. Values: asc, desc"
-  method_option :case, :aliases => "-c", :desc => "Transform case to type of case. Values: lowercase, upcase"
+  method_option :sort, aliases: "-s", desc: "Sort keys by name. Values: asc, desc"
+  method_option :case, aliases: "-c", desc: "Transform case to type of case. Values: lowercase, upcase"
   def export(file_a, file_b)
     sorted = Helper.sort(file_a, options[:sort])
     Logger.header("Exporting #{Paint[sorted.length.to_s, :green]} keys")
@@ -80,6 +80,15 @@ class Locotool < Thor
 
     Logger.lost_keys(lost_keys)
     strings_b_file.write
+  end
+
+  desc "oversize FILE TARGET_LANG GAP", "Identify and flag translations exceeding the length of the original language"
+  def oversize(file, target_lang, gap)
+    unless file.end_with?("xcstrings")
+      Logger.error("File format not supported. Only .xcstrings files are supported")
+      return
+    end
+    Helper.oversize(LocoStrings.load(file), target_lang, gap.to_i)
   end
 end
 

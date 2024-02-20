@@ -10,6 +10,8 @@ LocoTool is a command-line tool for localization tasks, designed to simplify the
 - Find duplicate keys between localization files.
 - Sync and move missing strings between files.
 - Validate and verify localization files.
+- Transform localization files between different formats.
+- Identify oversized strings in localization files.
 
 ### TODO
 
@@ -58,6 +60,14 @@ $ locotool export [PATH_A] [PATH_B] -s [SORT] -c [CASE]
 ```
 
 This command transforms localization files from `PATH_A` to `PATH_B`. It can sort the keys in the output files (`SORT`) and change the case of the keys (`CASE`). The `SORT` parameter can be set to `asc`, or `desc`. The `CASE` parameter can be set to `lower`, or `upper`. Both parameters are optional.
+
+### Identify Oversized Strings
+
+```
+$ locotool oversize [PATH_A] [TARGET_LANG] [GAP]
+```
+
+This command identifies oversized strings in the localization files in the specified directory (`PATH_A`). It compares the length of the strings in the target language (`TARGET_LANG`) with the base language and reports the strings that exceed the specified gap (`GAP`).
 
 ## Examples
 
