@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "loco_tool"
-  spec.version       = "0.1.3"
+  spec.version       = "0.1.4"
   spec.authors       = ["Aleksei Cherepanov"]
   spec.email         = ["ftp27host@gmail.com"]
   spec.summary       = "A CLI tool for parsing and validating localization strings"
